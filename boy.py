@@ -9,6 +9,7 @@ RUN_SPEED_KMPH = 20.0
 RUN_SPEED_PPS = RUN_SPEED_KMPH * 1000.0 / 60.0 / 60.0 * PIXEL_PER_METER
 AUTO_RUN_SPEED_PPS = RUN_SPEED_PPS * 2
 AUTO_RUN_SIZE = 150
+AUTO_RUN_DURATION = 5.0
 FRAMES_PER_SECOND = 8.0 / 0.5
 
 
@@ -26,6 +27,10 @@ def arrow_up(event):
 
 def a_down(event):
     return event[0] == 'INPUT' and event[1].type == SDL_KEYDOWN and event[1].key == SDLK_a
+
+
+def time_out(event):
+    return event[0] == 'TIME_OUT'
 
 
 class Idle:
@@ -76,6 +81,7 @@ class AutoRun:
     @staticmethod
     def enter(boy, event):
         boy.frame = 0.0
+        boy.auto_run_start = get_time()
 
     @staticmethod
     def exit(boy, event):
@@ -83,6 +89,9 @@ class AutoRun:
 
     @staticmethod
     def do(boy, frame_time):
+        if get_time() - boy.auto_run_start >= AUTO_RUN_DURATION:
+            boy.state_machine.handle_event(('TIME_OUT', None))
+            return
         boy.frame = (boy.frame + FRAMES_PER_SECOND * frame_time) % 8
         boy.x += boy.dir * AUTO_RUN_SPEED_PPS * frame_time
         half_width = AUTO_RUN_SIZE / 2
@@ -109,7 +118,7 @@ class StateMachine:
         self.transitions = {
             Idle: {left_down: Run, right_down: Run, a_down: AutoRun},
             Run: {left_down: Run, right_down: Run, arrow_up: Idle},
-            AutoRun: {},
+            AutoRun: {time_out: Idle},
         }
         self.current_state.enter(boy, ('START', None))
 

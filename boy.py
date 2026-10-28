@@ -85,6 +85,13 @@ class AutoRun:
     def do(boy, frame_time):
         boy.frame = (boy.frame + FRAMES_PER_SECOND * frame_time) % 8
         boy.x += boy.dir * AUTO_RUN_SPEED_PPS * frame_time
+        half_width = AUTO_RUN_SIZE / 2
+        if boy.x >= get_canvas_width() - half_width:
+            boy.x = get_canvas_width() - half_width
+            boy.dir = -1
+        elif boy.x <= half_width:
+            boy.x = half_width
+            boy.dir = 1
 
     @staticmethod
     def draw(boy):

@@ -81,7 +81,8 @@ class AutoRun:
 
     @staticmethod
     def do(boy, frame_time):
-        pass
+        boy.frame = (boy.frame + FRAMES_PER_SECOND * frame_time) % 8
+        boy.x += boy.dir * RUN_SPEED_PPS * frame_time
 
     @staticmethod
     def draw(boy):

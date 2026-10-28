@@ -118,7 +118,7 @@ class StateMachine:
         self.transitions = {
             Idle: {left_down: Run, right_down: Run, a_down: AutoRun},
             Run: {left_down: Run, right_down: Run, arrow_up: Idle},
-            AutoRun: {time_out: Idle},
+            AutoRun: {time_out: Idle, left_down: Run},
         }
         self.current_state.enter(boy, ('START', None))
 

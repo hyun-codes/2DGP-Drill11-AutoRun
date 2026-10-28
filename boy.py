@@ -7,6 +7,7 @@ from pico2d import (
 PIXEL_PER_METER = 10.0 / 0.3
 RUN_SPEED_KMPH = 20.0
 RUN_SPEED_PPS = RUN_SPEED_KMPH * 1000.0 / 60.0 / 60.0 * PIXEL_PER_METER
+AUTO_RUN_SPEED_PPS = RUN_SPEED_PPS * 2
 FRAMES_PER_SECOND = 8.0 / 0.5
 
 
@@ -82,7 +83,7 @@ class AutoRun:
     @staticmethod
     def do(boy, frame_time):
         boy.frame = (boy.frame + FRAMES_PER_SECOND * frame_time) % 8
-        boy.x += boy.dir * RUN_SPEED_PPS * frame_time
+        boy.x += boy.dir * AUTO_RUN_SPEED_PPS * frame_time
 
     @staticmethod
     def draw(boy):

@@ -11,11 +11,12 @@ py -3.13 -m venv .venv
 & .\.venv\Scripts\python.exe .\main.py
 ```
 
-현재 PC에서는 이 과제 폴더로 이동한 후 이미 설치한 상위 가상환경을 사용합니다.
+현재 PC의 과제 폴더는 `D:\2DGP_homework\2DGP-Drill11-AutoRun`입니다.
+이 폴더 안에 코드, 이미지, `.venv`, `.vscode`가 함께 있습니다.
+상위 폴더의 가상환경을 참조하지 않습니다.
 
-```powershell
-& ..\.venv\Scripts\python.exe .\main.py
-```
+VS Code에서 이 과제 폴더 자체를 열고 `main.py`를 실행하거나 **F5**를 누릅니다.
+`boy.py`와 `grass.py`는 `main.py`가 사용하는 클래스 파일입니다.
 
 좌우 방향키로 달리고, 키를 놓으면 대기합니다. 대기 중 **a**를 누르면
 5초 동안 2배 속도와 1.5배 크기로 자동 이동하며 양쪽 끝에서 방향을 바꿉니다.

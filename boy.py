@@ -82,6 +82,8 @@ class AutoRun:
     def enter(boy, event):
         boy.frame = 0.0
         boy.auto_run_start = get_time()
+        half_width = AUTO_RUN_SIZE / 2
+        boy.x = max(half_width, min(get_canvas_width() - half_width, boy.x))
 
     @staticmethod
     def exit(boy, event):
@@ -142,10 +144,19 @@ class Boy:
         self.x, self.y = get_canvas_width() / 2, 90
         self.dir = 1
         self.frame = 0.0
+        self.pressed_keys = set()
         self.image = load_image('animation_sheet.png')
         self.state_machine = StateMachine(self)
 
     def handle_event(self, event):
+        if event.type == SDL_KEYDOWN and event.key in (SDLK_LEFT, SDLK_RIGHT):
+            self.pressed_keys.add(event.key)
+        elif event.type == SDL_KEYUP and event.key in (SDLK_LEFT, SDLK_RIGHT):
+            self.pressed_keys.discard(event.key)
+            # 한 방향키를 떼어도 반대 키가 눌려 있으면 계속 달린다.
+            if self.state_machine.current_state is Run and self.pressed_keys:
+                self.dir = -1 if SDLK_LEFT in self.pressed_keys else 1
+                return
         self.state_machine.handle_event(('INPUT', event))
 
     def update(self, frame_time):

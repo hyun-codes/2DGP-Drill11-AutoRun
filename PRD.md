@@ -71,7 +71,7 @@ Python 문법 검사와 파일을 남기지 않는 간단한 상태/이벤트 �
 - Run은 약 185.19px/s, AutoRun은 약 370.37px/s이며 확대 크기는 150×150이다.
 - AutoRun 제한은 실제 시간 5초이며 재진입하면 시작 시간을 다시 기록한다.
 - 원본 프로젝트의 파일과 Git 기록, 미커밋 환경 설정은 수정하거나 커밋하지 않았다.
-- 이 별도 저장소에는 실제 구현 순서에 따른 한국어 커밋 12개를 남긴다.
-- 기능 구현은 완료했다. Public GitHub 저장소 생성과 push는 최종 사용자 승인 대기다.
-- GitHub 연결 계정은 `andrew-sy-cho`, 로컬 Git 작성자 이름은 `hyun-codes`이므로
-  공개 저장소를 생성할 계정도 승인 시 함께 확인한다. 원격 제출 주소는 아직 없다.
+- 실제 구현 순서에 따른 한국어 커밋 12개와 제출 주소를 반영한 문서 커밋을 남겼다.
+- 사용자 승인 후 `hyun-codes` 계정에 Public 저장소를 생성하고 `main`을 push했다.
+- 저장소: https://github.com/hyun-codes/2DGP-Drill11-AutoRun
+- e-Class 제출 주소: https://github.com/hyun-codes/2DGP-Drill11-AutoRun.git

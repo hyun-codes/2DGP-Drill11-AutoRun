@@ -22,6 +22,10 @@ def arrow_up(event):
     return event[0] == 'INPUT' and event[1].type == SDL_KEYUP and event[1].key in (SDLK_LEFT, SDLK_RIGHT)
 
 
+def a_down(event):
+    return event[0] == 'INPUT' and event[1].type == SDL_KEYDOWN and event[1].key == SDLK_a
+
+
 class Idle:
     @staticmethod
     def enter(boy, event):
@@ -89,7 +93,7 @@ class StateMachine:
         self.boy = boy
         self.current_state = Idle
         self.transitions = {
-            Idle: {left_down: Run, right_down: Run},
+            Idle: {left_down: Run, right_down: Run, a_down: AutoRun},
             Run: {left_down: Run, right_down: Run, arrow_up: Idle},
             AutoRun: {},
         }

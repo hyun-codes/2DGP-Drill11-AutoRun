@@ -8,6 +8,7 @@ PIXEL_PER_METER = 10.0 / 0.3
 RUN_SPEED_KMPH = 20.0
 RUN_SPEED_PPS = RUN_SPEED_KMPH * 1000.0 / 60.0 / 60.0 * PIXEL_PER_METER
 AUTO_RUN_SPEED_PPS = RUN_SPEED_PPS * 2
+AUTO_RUN_SIZE = 150
 FRAMES_PER_SECOND = 8.0 / 0.5
 
 
@@ -87,7 +88,11 @@ class AutoRun:
 
     @staticmethod
     def draw(boy):
-        Run.draw(boy)
+        row = 1 if boy.dir == 1 else 0
+        # 확대해도 발이 지면에 맞도록 중심 높이를 함께 올린다.
+        draw_y = boy.y + (AUTO_RUN_SIZE - 100) / 2
+        boy.image.clip_draw(int(boy.frame) * 100, row * 100, 100, 100,
+                            boy.x, draw_y, AUTO_RUN_SIZE, AUTO_RUN_SIZE)
 
 
 class StateMachine:
